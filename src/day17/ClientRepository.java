@@ -63,7 +63,7 @@ public class ClientRepository {
 
 	public boolean deposit(String account, long money) {
 	    for(String d : clients.keySet()) {
-		if (clients.containsKey(account)) {
+		if (account.equals(clients.get(d).getAccount())) {
 //	        ClientDTO client = clients.get(account);
 //	        client.setBalance(client.getBalance() + money);
 	        clients.get(d).setBalance(clients.get(d).getBalance()+money);
@@ -74,36 +74,43 @@ public class ClientRepository {
 	        breakdown.setDealMoney(money);
 	        breakdown.setTotalMoney(clients.get(d).getBalance());
 	        breakdowns.add(breakdown);
-
 	        return true;
+	        
 	    }
 	    
 	}return false;
-	}
+}
 
 	public boolean withdraw(String account, long money) {
-	    if (clients.containsKey(account)) {
-	        ClientDTO client = clients.get(account);
-	        if (client.getBalance() >= money) {
-	            client.setBalance(client.getBalance() - money);
+		for(String d : clients.keySet()) {
+			if (account.equals(clients.get(d).getAccount())) {
+//	        ClientDTO client = clients.get(account);
+	        if (clients.get(d).getBalance() >= money) {
+	        	clients.get(d).setBalance(clients.get(d).getBalance()-money);
 
 	            BreakdownDTO breakdown = new BreakdownDTO();
 	            breakdown.setAccount(account);
 	            breakdown.setDivision("출금");
 	            breakdown.setDealMoney(money);
-	            breakdown.setTotalMoney(client.getBalance());
+	            breakdown.setTotalMoney(clients.get(d).getBalance());
 	            breakdowns.add(breakdown);
 
 	            return true;
 	        }
 	    }
-	    return false;
+	    
+	}
+		return false;
 	}
 
 	public boolean transferCheck(String transferAccount) {
-	    return clients.containsKey(transferAccount);
+		for(String d : clients.keySet()) {
+			if(transferAccount.equals(clients.get(d).getAccount())) {
+				return true;
+			}
+		}
+		return false;
 	}
-
 	public boolean update(String id, String password, String updatePassword) {
 	    if (clients.containsKey(id)) {
 	        ClientDTO client = clients.get(id);

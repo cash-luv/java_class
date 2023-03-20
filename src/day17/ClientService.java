@@ -18,6 +18,7 @@ public class ClientService {
 		
 		public void save() {
 			ClientDTO clientDTO = new ClientDTO();
+			while(true) {
 			System.out.print("id> ");
 			clientDTO.setId(sc.next());
 			System.out.print("password> ");
@@ -26,10 +27,12 @@ public class ClientService {
 			clientDTO.setName(sc.next());
 			if(repository.save(clientDTO)) {
 				System.out.println("회원가입성공");
+				break;
 			}else {
-				System.out.println("회원가입실패");
+				System.out.println("ID 중복 입니다");
 			}
 		}
+	}
 		public boolean loginCheck() {
 			System.out.print("id> ");
 			String id = sc.next();
@@ -84,7 +87,7 @@ public class ClientService {
 			}else {
 				System.out.print("입금금액> ");
 				long money = sc.nextLong();
-				if(repository.deposit(account, money) == false) {
+				if(repository.deposit(account, money)) {
 					System.out.println("입금성공");
 				}else {
 					System.out.println("입금실패");

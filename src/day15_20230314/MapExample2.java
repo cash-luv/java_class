@@ -19,6 +19,7 @@ public class MapExample2 {
 			System.out.println(key); // key 값 확인
 			System.out.println(map2.get(key)); //value 값 확인
 		}
+		map2.forEach((key, value) -> System.out.println(key + " : " + value));
 	}
 
 }

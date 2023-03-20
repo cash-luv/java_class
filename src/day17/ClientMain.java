@@ -49,7 +49,7 @@ public class ClientMain {
 				}else if(menu == 7 && loginOk) {
 					service.logout();
 					loginOk = false;
-				}else if(menu == 0 && loginOk) {
+				}else if(menu == 0 ) {
 					break;
 				}else {
 					System.out.println("다시입력");
